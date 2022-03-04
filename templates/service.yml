@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+spec:
+  selector:
+    app: cjbackend
+  ports:
+    - name: app1
+      port: 443
+      targetPort: 443
+    - name: app2
+      port: 8089
+      targetPort: 81
+  type: ClusterIP

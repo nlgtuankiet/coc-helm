@@ -1,0 +1,15 @@
+ingress-nginx:
+  controller:
+    service:
+      enableHttp: true
+      enableHttps: true
+      type: LoadBalancer
+      loadBalancerIP: 155.248.230.45
+      annotations:
+        service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
+        service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+        service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "10"
+        service.beta.kubernetes.io/oci-load-balancer-backend-protocol: "TCP"
+host: api.coinomegacoin.com
+issuer:
+  server: https://acme-v02.api.letsencrypt.org/directory

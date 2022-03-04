@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cjbackend
+  labels:
+    app: cjbackend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cjbackend
+  template:
+    metadata:
+      labels:
+        app: cjbackend
+    spec:
+      containers:
+        - name: cjbackend
+          image: nlgtuankiet/cjbackend:1.0.4
+          ports:
+            - containerPort: 443
+          env:
+            - name: PORT
+              value: "443"
+        - name: echo
+          image: jmalloc/echo-server:0.3.1
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "81"
