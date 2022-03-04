@@ -18,4 +18,4 @@ spec:
     - selector: {}
       http01:
         ingress:
-          name: coinomegacoin
+          class: nginx
