@@ -10,6 +10,13 @@ ingress-nginx:
         service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
         service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "10"
         service.beta.kubernetes.io/oci-load-balancer-backend-protocol: "TCP"
-host: api.coinomegacoin.com
+host: &host api.coinomegacoin.com
 issuer:
   server: https://acme-v02.api.letsencrypt.org/directory
+kube-prometheus-stack:
+  grafana:
+    grafana.ini:
+      server:
+        domain: &host
+        root_url: https://api.coinomegacoin.com/grafana/
+        serve_from_sub_path: true
