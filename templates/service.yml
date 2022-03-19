@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: service1
+  name: coc-service
 spec:
   selector:
-    app: cjbackend
+    app: coc-backend
   ports:
-    - name: app1
-      port: 443
-      targetPort: 443
-    - name: app2
-      port: 8089
+    - name: app-test
+      port: 81
       targetPort: 81
+    - name: app-main
+      port: 80
+      targetPort: 80
   type: ClusterIP

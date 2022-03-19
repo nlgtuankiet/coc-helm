@@ -16,20 +16,13 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: service1
+                name: coc-service
                 port:
-                  number: 443
-          - path: /s2
+                  number: 81
+          - path: /backup/watchlist
             pathType: ImplementationSpecific
             backend:
               service:
-                name: service2
+                name: coc-service
                 port:
                   number: 80
-          - path: /s3
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: service1
-                port:
-                  number: 8089
