@@ -1,6 +1,8 @@
 firebase_service_account_secret_name: coc-firebase-service-account
 firebase_service_account_file_name: firebase-service-account.json
 firebase_service_account_file_base64: override-this
+postgres_password_base64: override-this
+postgres_config_base64: override-this
 ingress-nginx:
   controller:
     service:
