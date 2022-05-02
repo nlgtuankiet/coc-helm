@@ -14,6 +14,8 @@ metadata:
     app: coc-postgres
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: coc-postgres
@@ -27,15 +29,22 @@ spec:
         hostPath:
           path: /usr/local/postgres/prod/14/data
           type: DirectoryOrCreate
+      - name: log-dir
+        hostPath:
+          path: /home/ubuntu/mega/prod/14/log
       - name: secret-dir
         secret:
           secretName: postgres-secret
       containers:
         - name: postgres
           image: postgres:14.2
+          ports:
+          - containerPort: 5432
           volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: data-dir
+          - mountPath: /var/lib/postgresql/log
+            name: log-dir
           - mountPath: "/var/lib/postgresql/secret"
             name: secret-dir
             readOnly: true
@@ -47,3 +56,18 @@ spec:
           - config_file=/var/lib/postgresql/secret/postgresql.conf
           - -c
           - data_directory=/var/lib/postgresql/data
+          - -c
+          - log_directory=/var/lib/postgresql/log
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coc-postgres
+spec:
+  selector:
+    app: coc-postgres
+  ports:
+    - name: default
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
